@@ -33,12 +33,11 @@ const Contact = () => {
         }
     }
     return (
-        <div className=" row mt-2">
+        <div className="row mt-6">
                
-                       <div className="col-md-7 mt-5 col- mx-auto"> 
+                       <div className="col-md-10 mx-auto col-12 card shadow-lg border-0 p-6  mt-10"> 
                        <h1 className="p-2">Ubicación de la Hostería</h1>
                        <SimpleMap/>
-                      
                             <div className="card shadow-lg border-0 p-2 mt-4">
                                 <h1 id="contactH1" className="text-center text-white display-4 d-inline-block ">Contáctanos</h1>
                                 <div className="row">
@@ -55,53 +54,59 @@ const Contact = () => {
                                         
                            
                                     </div>
-                                 <div className="col-sm-6 col-md-5 offset-md-3 col-lg-6 offset-lg-0">
+                                <div className="col-sm-6 col-md-5 offset-md-3 col-lg-6 offset-lg-0">
                                 <form onSubmit={submitForm} className="form-group my-4 text-center p-2">
                                     <div className="row">
-                                        <div className="col-md-6 col-12 mx-auto my-2">
-                                            <label className="col-12">Nombre:</label>
+                                        
+                                            
                                             <input type="text" className="form-control-lg col-12 "  
                                             onChange={e=>setNombre(e.target.value)}
                                             value={nombre}
                                             placeholder="Su nombre..." required />
-                                        </div>
-                                        <div className="col-md-6 col-12 mx-auto my-2">
-                                        <label className="col-12 ">Apellido: </label>
+                                        
+                                      
+                                    </div>
+                                    <div><p></p></div>
+                                    <div className="row">
+                                    
+                                        
                                             <input type="text" className="form-control-lg   col-12  " 
                                             onChange={e=>setApellido(e.target.value)}
                                             value={apellido}
                                             placeholder="Su apellido..." required />
-                                        </div>
+                                    
                                     </div>
-                                
+                                    <div><p></p></div>
                                     <div className="form-group mb-5">
                                         <div className="row">
-                                            <div className="col-md-6 col-12 mx-auto my-2">
-                                                <label className="col-12">Correo Electrónico:</label>
+                                            
+                                                
                                                 <input type="email" className="form-control-lg col-12" 
                                                 onChange={e=>setEmail(e.target.value)}
                                                 value={email}
                                                 placeholder="Su correo electrónico..." required />
-                                            </div>
-                                            <div className="col-md-6 col-12 mx-auto my-2">
-                                            <label className="col-12">Teléfono:</label>
+                                            
+                                            
+                                        </div>
+                                        <div><p></p></div>
+                                        <div className="row">
+                                        
+                                            
                                                 <input type="tel" className="form-control-lg col-12" 
                                                 onChange={e=>setTelefono(e.target.value)}
                                                 value={telefono}
                                                 placeholder="Su teléfono... " required />
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label className="col-12">Mensaje:</label>
                                             <textarea className="form-control"  
                                             onChange={e=>setMensaje(e.target.value)}
                                             value={mensaje}
-                                            placeholder="Dejanos tu opinión o requerimiento ..." required  rows="3"></textarea>
+                                            placeholder="Dejanos tu opinión o requerimiento ..." required  rows="4"></textarea>
                                     
                                     </div>
                                     <div className="mt-5 col-md-6 col-12 mx-auto  ">
-                                        
                                         <button 
                                         type="submit"
                                         id="botonEnviarContactanos"

@@ -14,7 +14,7 @@ const ReservaDisplay = ({habitacion}) => {
         <div className="row mt-6 ">
             <div className="col-md-10 mx-auto col-12 card shadow-lg border-0 p-4  mt-10">
                 <div>
-                    <h1 className="display-4  mt-10">Reserva Actual</h1>
+                    <h1 className="display-4  mt-10">Reservas Aprobadas</h1>
                 </div>
                     <div className="row">
                         <div className="col-md-6 col-12 my-auto">
@@ -47,10 +47,6 @@ const ReservaDisplay = ({habitacion}) => {
                             <div className="col-md-6 col-12">
                                 <div className="form-group">
                                      <h6 className="font-weight-bolder">Hasta :  {hasta}  </h6>
-                                    
-
-
-
                                 </div>
                             </div>
                         </div>

@@ -35,7 +35,7 @@ const Actividades = () => {
                 </div>
                 
                 
-            </div >
+            </div>
         </div>
     )
 

@@ -14,7 +14,7 @@ const ReservaDisplay = ({habitacion2}) => {
         <div className="row mt-6 ">
             <div className="col-md-10 mx-auto col-12 card shadow-lg border-0 p-4  mt-10">
                 <div>
-                    <h1 className="display-4  mt-10">Reserva Anterior</h1>
+                    <h1 className="display-4  mt-10">Reserva Pendiente</h1>
                 </div>
                     <div className="row">
                         <div className="col-md-6 col-12 my-auto">
@@ -56,8 +56,13 @@ const ReservaDisplay = ({habitacion2}) => {
                   
                         
                             <div className="col-md-6 col-12 my-4 ">
-                                
-                                <h6 className="font-weight-bold">Total pagado: <span className="text-primary">${habitacion2.total}</span></h6>
+                                <mark> Hostería Rios y Montaña le recuerda que debe realizar el pago de la reserva en un periodo máximo de 2 días.</mark>
+                                 <p></p>
+                                 <p>Realizar el depósito a la cuenta # ---------------</p>
+                                 <p>Titular de la cuenta: --------------</p>
+                                 <p>Número de cédula del titular: ----------</p>
+                                 <p></p>
+                                 <h6 className="font-weight-bold">Total a pagar: <span className="text-primary">${habitacion2.total}</span></h6>
                             </div>
                         </div>
                     </div>

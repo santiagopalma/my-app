@@ -7,7 +7,7 @@ import es from 'date-fns/locale/es'
 import {RoomContext} from '../context/RoomProvider';
 import {auth,db} from '../firebase';
 import BotonPayPal from "../components/botonPaypal";
-
+import BotonPayphone from "../components/botonPayphone";
 registerLocale("es",es)
 
 export const habitacionContext=React.createContext()
@@ -25,12 +25,14 @@ export default class Booknow extends Component {
             precio: 0,
             total: 0,
             diasFuera: 0,
-            id:"",
+            idRoom:"",
             imagen:"",
             imagenes: [],
             existencia:"",
             startDate: null,
             endDate: null,
+            idCliente:"",
+            metodoPago: "Transferencia bancaria",
     };
     
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
@@ -50,19 +52,23 @@ export default class Booknow extends Component {
     }
     savedata(){
        
-        this.state.endDate=new Date(this.state.endDate)
-        this.state.startDate=new Date(this.state.startDate)
-       const id = auth.currentUser.email
+        this.state.endDate=new Date(this.state.endDate);
+        this.state.startDate=new Date(this.state.startDate);
+
+       const id = auth.currentUser.email;
+       this.state.idCliente=id;
        const user =db.collection('usuarios').doc(id).collection("reservas").add(
           this.state
+          
        )
        console.log("INFO ACTUAL",user)
     }
 
+    enviarCorreo(){
 
+    }
     mostrardato(){
         console.log("mi total",this.state )
-
     }
       calculateDaysLeft(startDate, endDate) {
           if (!moment.isMoment(startDate)) startDate = moment(startDate);
@@ -74,7 +80,7 @@ export default class Booknow extends Component {
      
     render() {
         
-        
+  
         const room =  this.context
 
         const { startDate, endDate } = this.state;
@@ -83,10 +89,10 @@ export default class Booknow extends Component {
         const total=daysLeft*room.room.precio
         this.state.precio=room.room.precio
         this.state.nombre=room.room.categoria
-        this.state.id=room.room.nombre
+        this.state.idRoom=room.room.nombre
         this.state.total=total
         this.state.diasFuera=daysLeft
-        this.state.existencia = true 
+        this.state.existencia = false 
         this.state.imagen=room.room.imagen
         return (
             <div className="container my-10 mt-5 p-5">
@@ -109,7 +115,7 @@ export default class Booknow extends Component {
                                     </tr>
                                     <tr>
                                         <th>Capacidad</th>
-                                        <td>este numero es dado por la base de datos</td>
+                                        <td>2</td>
                                     </tr>
  
                                     <tr>
@@ -127,15 +133,18 @@ export default class Booknow extends Component {
                     <div className="row my-3">
                         <div className="col-md-6 col-12">
                             <div className="form-group">
-                                <label htmlFor="Fromdate" className="font-weight-bolder mr-3">Desde : </label>
-                                <DatePicker     
+                                <label htmlFor="Fromdate" className="font-weight-bolder mr-3" >Desde : </label>
+                                <DatePicker   
+                                required  
                                     locale="es"
                                     selected={this.state.startDate} 
                                     onChange={this.handleChangeStart} 
                                     className="form-control  " 
                                     placeholderText="Fecha de inicio"
                                     minDate={new Date()}
-                                    dateFormat="MMMM d, yyyy" />
+                                    dateFormat="MMMM d, yyyy" 
+                                    
+                                    />
                                     
                                 
                             </div>
@@ -143,15 +152,18 @@ export default class Booknow extends Component {
                         </div>
                         <div className="col-md-6 col-12">
                             <div className="form-group">
-                                <label htmlFor="Todate" className="font-weight-bolder mr-3">Hasta :    </label>
+                                <label htmlFor="Todate" className="font-weight-bolder mr-3" >Hasta :    </label>
                                 <DatePicker 
+                                required
                                 locale="es"
                                 selected={this.state.endDate} 
                                 minDate={new Date()}
                                 onChange={this.handleChangeEnd} 
                                 placeholderText="Fecha Fin"   
                                 className="form-control" 
-                                dateFormat="MMMM d, yyyy" />
+                                dateFormat="MMMM d, yyyy" 
+                                
+                                />
 
  
 
@@ -163,40 +175,37 @@ export default class Booknow extends Component {
                     <div className="row p-2">
                         <div className="col-md-6 col-12 my-4">
                             <h6 className="font-weight-bolder">Días de reserva: {daysLeft}</h6>
-                            <mark>Por favor, asegurese de realizar su registro entre las 9 am y 12 pm</mark>
+                            <mark>Nota: En caso de elegir transferencia Bancaria realizar el pago en un periodo máximo de dos días </mark>
                             
                         </div>
                     
                         <div className="col-md-6 col-12 my-4 ">
-                            <h6 className="font-weight-bold">Precio por día : <span className="text-primary">${room.room.precio}</span>  </h6>
+                            <h6 className="font-weight-bold">Precio por día : <span className="text-primary">$ {room.room.precio}</span>  </h6>
                            
-                            <h6 className="font-weight-bold">Total a pagar : <span className="text-primary">$ {total}</span></h6>
+                            <h6 className="font-weight-bold">Total a pagar : <span className="text-primary">$ {+total}</span></h6>
                         </div>
                     </div>
                     <div className="row my-3">
                         <div className="col-md-6 col-12">
                             <div className="form-group">
                                 <label htmlFor="payment" className="font-weight-bolder mb-1">Opciones de pago</label>
-                                <select className="form-control">
-                                    <option disabled>Seleccione método de pago </option>
-                                    <option value="Credit">Crédito</option>
-                                    <option value="Debit">Débito</option>
-                                    <option value="Debit">Paypal</option>
                                 
-                                </select>
-                                <BotonPayPal />
+                                <p></p>
+                                <BotonPayPal/>
                             </div>
                         </div>
                         <div className="col-md-6 col-12 my-4 ">
                             <div className="col-md-6 col-12 float-right my-1 px-4">
-                                <Link to="/" className="btn btn-block btn-outline-primary center " 
+                                <Link to="/Reserva/" className="btn btn-block btn-outline-primary center " 
                                 data-toggle="modal" 
                                 data-target="#thanks"
                                 onClick={()=>{
                                     this.savedata();
-                                    this.mostrardato()}}
+                                    this.mostrardato();
+                                    this.enviarCorreo();
+                                    }}
                                 
-                                >Confirmar Registro</Link>
+                                >Transferencia/Depósito</Link>
                             </div>
                           
                         </div>
@@ -221,4 +230,5 @@ export default class Booknow extends Component {
      
     )
     }
+
 }

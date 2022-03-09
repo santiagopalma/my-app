@@ -9,7 +9,7 @@ const Footer = () => {
             <div>
                 <div className="row justify-content-center " >
                 
-                        <small  className="col-md-2 col-7 my-2 justify-content-center">Copyright &copy; Service - Soft Developer</small>
+                        <small  className="col-md-2 col-7 my-2 justify-content-center">Copyright &copy; Tiretec Developer</small>
                      
                   
                         <div className=" row justify-content-md-center">

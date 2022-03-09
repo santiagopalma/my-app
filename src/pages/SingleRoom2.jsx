@@ -63,7 +63,7 @@ const SingleRoom2=(habitacion )=>{
                  <h3>Información: </h3>
                  <h6>Precio : ${room.precio}</h6>
                  <h6>
-                     Capacidad : {" 1 "}
+                     Capacidad : {" 2 "}
                  </h6>
                  <h6>Mascotas permitidas : No se admite</h6>
                  <h6> Desayuno gratis incluido</h6>
